@@ -1,0 +1,73 @@
+--primeiro exercicio
+multiplos :: [Int] -> [Int]
+multiplos list = [x | x <- list, x `mod` 3 == 0 || x `mod` 5 == 0]
+
+somaMult :: [Int] -> Int
+somaMult soma = sum (multiplos soma)
+--command: somaMult [1..999]
+
+
+--Exercicio2
+fibs :: [Integer]
+fibs = 1 : 2 : [n+m | (n, m) <- zip fibs (tail fibs)]
+
+exercicio2 = sum $ filter (<4000000) $ take 60 $ filter (even) fibs
+--command: fibs_even
+
+
+--Ex3
+exercicio3 = last (fatoresPrimos 600851475143)
+
+fatoresPrimos n = fator n primos
+  where
+    fator n (p:ps) 
+        | p*p > n = [n]
+        | n `mod` p == 0 = p : fator (n `div` p) (p:ps)
+        | otherwise = fator n ps
+
+primos = 2 : filter(null.tail.fatoresPrimos) [3,5..]
+--Null testa se o tail da lista é vazio
+
+
+--EX 4
+exercicio4 = 
+  maximum [x | y<-[100..999], z<-[y..999], let x=y*z, let s=show x, s ==reverse s]
+  --maximum = http://zvon.org/other/haskell/Outputprelude/maximum_f.html
+--let(um where melhor) = https://wiki.haskell.org/Let_vs._Where
+
+
+--EX 5
+exercicio5 = foldr1 lcm [1..20]
+--lcm = menor multiplo comum 
+--foldr1 = http://zvon.org/other/haskell/Outputprelude/foldr1_f.html
+
+
+--EX 6 
+exercicio6 = (sum [1..100])^2 - sum (map (^2) [1..100])
+--http://zvon.org/other/haskell/Outputprelude/map_f.html
+
+
+--EX 7
+exercicio7 = primos !! 10000
+--usamos o primo do EX 3
+
+
+--EX 9 
+triplos l = [[a,b,c] | m <- [2..limit],
+                        n <- [1..(m-1)], 
+                        let a = m^2 - n^2, 
+                        let b = 2*m*n, 
+                        let c = m^2 + n^2,
+                        a+b+c==l]
+    where limite = floor . sqrt . fromIntegral $ l
+
+exercicio9 = product . head . triplos $ 1000
+--let(um where melhor) = https://wiki.haskell.org/Let_vs._Where
+--product = http://zvon.org/other/haskell/Outputprelude/product_f.html
+
+
+--EX 10
+exercicio10 = sum (takeWhile (< 1000000) primos)
+--usamos o primo do EX 3
+-- takeWhile = http://zvon.org/other/haskell/Outputprelude/takeWhile_f.html
+--takewhile cria uma lista a partir de outra
