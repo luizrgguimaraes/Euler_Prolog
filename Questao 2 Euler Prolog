@@ -1,0 +1,12 @@
+fribonacci(0,1):-!.
+fribonacci(1,1):-!.
+fribonacci(X,R):-X1 is X -1,
+    				X2 is X - 2,
+    				fribonacci(X1,R1), 
+    				fribonacci(X2,R2),
+    				R is R1 + R2.
+impar(N):- N mod 2 =\= 0.
+somaFribo(N,0):-fribonacci(N,R1),R1 > 4000000,!.
+somaFribo(N,R):-fribonacci(N,R1),impar(R1),L is (N+1),somaFribo(L,R),!.
+somaFribo(N,R):-fribonacci(N,R1),L is (N+1),somaFribo(L,R2),R is (R1+R2),!.
+
