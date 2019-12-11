@@ -1,0 +1,10 @@
+--funciona mas demora muito
+fribonacci 0 = 1
+fribonacci 1 = 1
+fribonacci x = fribonacci (x-1) + fribonacci (x-2)
+fribonacciSumAux y = if (fribonacci y)>4000000 then 0 else
+                          if(fribonacci y) `mod` 2 /= 0 then 
+                            fribonacciSumAux (y + 1)
+                          else
+                            fribonacci y + fribonacciSumAux (y + 1)
+fribonacciSum = fribonacciSumAux 1
