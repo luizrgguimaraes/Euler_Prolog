@@ -1,0 +1,7 @@
+soma([X],X):-!.
+soma([X|XS],R):-soma(XS,S),R is X+S. 
+multiplos35sum(N,R):-N1 is (N-1),multiplos35(N1,M),soma(M,R).
+multiplos35(3,[3]):-!.
+multiplos35(N,[N|M]):-N mod 3 =:= 0,N1 is (N-1),multiplos35(N1,M),!.
+multiplos35(N,[N|M]):-N mod 5 =:= 0,N1 is (N-1),multiplos35(N1,M),!.
+multiplos35(N,M):-N1 is (N-1),multiplos35(N1,M).
